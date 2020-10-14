@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 	s.dependency 'NYTPhotoViewer', '1.2.0'
 	s.dependency 'ProgressHUD'
 	s.dependency 'Socket.IO-Client-Swift', '~> 14.0'
-	s.dependency 'Alamofire', '~> 4.0'
+	s.dependency 'Alamofire', '~> 5.0'
 	s.dependency 'QBImagePickerController', '~> 3.4'
 	s.dependency 'UIAlertController+Blocks'
 	s.dependency 'SDWebImage', '~> 4.0'

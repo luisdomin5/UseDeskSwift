@@ -269,7 +269,7 @@ public class UseDeskSDK: NSObject {
                 url += "api.usedesk.ru"
             }
             url += "/support/\(self.account_id)/list?api_token=\(self.api_token)"
-            request(url).responseJSON{  responseJSON in
+            AF.request(url).responseJSON{  responseJSON in
                 switch responseJSON.result {
                 case .success(let value):
                     guard let collections = BaseCollection.getArray(from: value) else {
@@ -298,7 +298,7 @@ public class UseDeskSDK: NSObject {
                 url += "api.usedesk.ru"
             }
             url += "/support/\(self.account_id)/articles/\(articleID)?api_token=\(self.api_token)"
-            request(url).responseJSON{ responseJSON in
+            AF.request(url).responseJSON{ responseJSON in
                 switch responseJSON.result {
                 case .success(let value):
                     guard let article = Article.get(from: value) else {
@@ -327,7 +327,7 @@ public class UseDeskSDK: NSObject {
                 url += "api.usedesk.ru"
             }
             url += "/support/\(self.account_id)/articles/\(articleID)/add-views?api_token=\(self.api_token)&count=\(count)"
-            request(url).responseJSON{ responseJSON in
+            AF.request(url).responseJSON{ responseJSON in
                 switch responseJSON.result {
                 case .success( _):
                     connectBlock(true, "")
@@ -355,7 +355,7 @@ public class UseDeskSDK: NSObject {
             url +=   "/support/\(self.account_id)/articles/\(articleID)/change-rating?api_token=\(self.api_token)"
             url += countPositiv > 0 ? "&count_positive=\(countPositiv)" : ""
             url += countNegativ > 0 ? "&count_negative=\(countNegativ)" : ""
-            request(url).responseJSON{ responseJSON in
+            AF.request(url).responseJSON{ responseJSON in
                 switch responseJSON.result {
                 case .success( _):
                     connectBlock(true, "")
@@ -390,7 +390,7 @@ public class UseDeskSDK: NSObject {
             if name != "" {
                 parameters["client_name"] = name
             }
-            request(url, method: .post, parameters: parameters).responseJSON{ responseJSON in
+            AF.request(url, method: .post, parameters: parameters).responseJSON{ responseJSON in
                 switch responseJSON.result {
                 case .success( _):
                     connectBlock(true, "")
@@ -488,7 +488,7 @@ public class UseDeskSDK: NSObject {
 
             let escapedUrl = urlForEncode.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
             url += escapedUrl ?? ""
-            request(url).responseJSON{ responseJSON in
+            AF.request(url).responseJSON{ responseJSON in
                 switch responseJSON.result {
                 case .success(let value):
                     guard let articles = SearchArticle(from: value) else {
@@ -518,7 +518,7 @@ public class UseDeskSDK: NSObject {
         ]
         
         let urlStr = "https://secure.usedesk.ru/widget.js/post"
-        request(urlStr, method: .post, parameters: param as Parameters, encoding: JSONEncoding.default).responseJSON{ responseJSON in
+        AF.request(urlStr, method: .post, parameters: param as Parameters, encoding: JSONEncoding.default).responseJSON{ responseJSON in
             switch responseJSON.result {
             case .success( _):
                 resultBlock(true, nil)

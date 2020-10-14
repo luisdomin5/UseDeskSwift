@@ -13,8 +13,8 @@ class UDFileManager: NSObject {
         if let url = URL(string: urlPath) {
             let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
             
-            Alamofire.download(url, to: destination).responseData { response in
-                if let destinationUrl = response.destinationURL {
+            Alamofire.AF.download(url, to: destination).responseData { response in
+                if let destinationUrl = response.fileURL {
                     successBlock(indexPath, destinationUrl)
                 }
             }
