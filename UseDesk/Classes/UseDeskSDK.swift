@@ -848,7 +848,9 @@ public class UseDeskSDK: NSObject {
     
     public func releaseChat() {
         socket = manager?.defaultSocket
+        socket?.removeAllHandlers()
         socket?.disconnect()
+        socket = nil
     }
     
 }
