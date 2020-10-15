@@ -26,7 +26,13 @@ class UDNavigationController: UINavigationController {
         titleTextFont = titleTextFont ?? navBarTextFont
         
         barTintColor = (barTintColor != nil) ? barTintColor : navBarBackgroundColor
-        navigationBar.barTintColor = barTintColor
+        if #available(iOS 13.0, *) {
+            let appearance = self.navigationBar.standardAppearance
+            appearance.backgroundColor = barTintColor
+            navigationBar.standardAppearance = appearance
+        } else {
+            navigationBar.barTintColor = barTintColor
+        }
         navigationBar.tintColor = titleTextColor
     }
     
@@ -38,6 +44,12 @@ class UDNavigationController: UINavigationController {
         if let textFont = titleTextFont {
             attributes[.font] = textFont
         }
-        navigationBar.titleTextAttributes = attributes
+        if #available(iOS 13.0, *) {
+            let appearance = self.navigationBar.standardAppearance
+            appearance.titleTextAttributes = attributes
+            navigationBar.standardAppearance = appearance
+        } else {
+            navigationBar.titleTextAttributes = attributes
+        }
     }
 }
